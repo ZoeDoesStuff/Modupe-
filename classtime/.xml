@@ -1,0 +1,16 @@
+<students>
+  <student>
+<name>Tobi</name>
+<grade>10</grade>
+<age>15</age>
+</student>
+<student>
+  <name>Precious</name>
+  <grade>10</grade>
+  <age>15</age>
+  </student>
+  <student>
+  <name>Modupe</name>
+  <grade>10</grade>
+  <age>15</age>
+  </student> 

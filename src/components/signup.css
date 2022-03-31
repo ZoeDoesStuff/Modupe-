@@ -1,0 +1,30 @@
+
+body {
+  background: linear-gradient(to left, #e98e52, #f1d143 10%, #f03312 105%);
+  color: rgb(255, 255, 255);
+  padding: 40px;
+  font-family: 'Times New Roman', Times, serif;
+  text-align: center; 
+  font-size: xx-large;
+  background-image: linear-gradient(); 
+  align-content: left;
+  flex-direction: column;
+  background-image: url(https://www.utep.edu/technologysupport/_Files/images/CYB_WindowsStudent_01.png);
+}
+
+button {
+  size: 20px;
+}
+.bg-image{
+ padding: 15em;
+ background-repeat: no-repeat;
+background-position:top;
+background-size: contain;
+width: 300px;
+height: 600vh;
+position: fixed;
+
+}
+
+
+

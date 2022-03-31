@@ -1,0 +1,11 @@
+body {
+    background: linear-gradient(#e66465, #9198e5);
+    background: linear-gradient(to left, #e98e52, #f1d143 10%, #f03312 105%);
+    color: rgb(0, 0, 0);
+    padding: 40px;
+    font-family: Arial;
+    text-align: center; 
+    font-size: x-large;
+    background-image: linear-gradient(); 
+    align-content: center;
+  }
