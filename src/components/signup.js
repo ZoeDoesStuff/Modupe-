@@ -26,6 +26,7 @@ function Signup() {
         },
         onSubmit: (values) => {
             setProcessing(true)
+            console.log(values)
             //call firebase to signup
             signup(values)
             setProcessing(false)
@@ -34,11 +35,11 @@ function Signup() {
         validationSchema: signUpvalidationSchema,
         validateOnChange: false,
         validateOnBlur: false,
-        onSubmit: (data, { resetForm }) => {
-        },
+       
+        
     })
 
-    console.log(formik.values)
+
     return (
         <><div>
             <button> <a href="http://localhost:3000/">Login Page </a> </button> <button> <a href="/contactus">Contact Us </a> </button> <button> <a href="/resetpassword">Forgot Password?</a> </button> <button> <a href="/about">About Us</a> </button>
@@ -78,9 +79,8 @@ function Signup() {
                     <div className="text-red-500 text-xs">
                         {formik.errors.address}
                     </div>
-                    <div></div>
-                    <div>
-                        <br></br><button type="submit" />Signup</div>
+
+                    <br></br><button type="submit" >Signup</button>
                     <br></br>
                     <br></br>
                     {processing && <FaSpinner icon="spinner" className="spinner animate-spin" color="red" size={35} />}

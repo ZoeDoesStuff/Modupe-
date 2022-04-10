@@ -33,7 +33,7 @@ export const Signin = ({ Names, password }, onSuccess, onFailure) => {
     .then((userCredential) => {
       const user = userCredential.user;
       console.log("userSignedInSuccessfully")
-      store.user.set({ fullName: user.displayName, email: user.email, emailVerified: user.emailVerified, isAuthenticated: true })
+      store.user.set({ fullName: user.displayName, email: user.email, emailVerified: user.emailVerified, isAuthenticated: true, uid:user.uid })
       if (onSuccess) {
         onSuccess();
 

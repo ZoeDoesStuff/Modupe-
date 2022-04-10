@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom"
 import "./signin.css";
 import { Signin } from './services/auth';
 function SigninPage({  }) {
-  const [names, setNames] = useState("")
+  const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const navigate = useNavigate()
   const [serverError, setServerError] = useState("")
   const formik = useFormik({
     initialValues: {
-      names: "",
+      email: "",
       password: "",
     },
     onSubmit: (values) => {
@@ -20,7 +20,7 @@ function SigninPage({  }) {
     validationSchema: SigninvalidationSchema
   })
   const onSuccess = () => {
-
+  navigate ("/Home");
   }
   const onFailure = (message) => {
     setServerError(message);
@@ -34,13 +34,7 @@ function SigninPage({  }) {
   const aboutHandler = () => {
     navigate("/about")
   }
-  const handleNames = (e) => { setNames(e.target.value) }
-  const handlePassword = (e) => { setPassword(e.target.value) }
-  const handleSignin = () => {
-    console.log(names)
-    console.log(password)
-  }
-  console.log(formik.values)
+ 
   return (
     <><div className='App' onClick={signupHandler}>
     </div>
@@ -49,8 +43,8 @@ function SigninPage({  }) {
         <div className="form-inner">
           <h1>Sign In</h1>
          
-          <label htmlFor="name"> Names:</label>
-          <input onChange={formik.handleChange} value={formik.values.names} type="text" name="names" id="names" placeholder="Enter Names Here" />
+          <label htmlFor="name"> Email:</label>
+          <input onChange={formik.handleChange} value={formik.values.email} type="text" name="Email" id="Email" placeholder="Enter Email Here" />
           {formik.errors.names}
         </div>
         <div className="form-group">
@@ -59,7 +53,8 @@ function SigninPage({  }) {
           <label htmlFor="password">Password:</label>
           <input onChange={formik.handleChange} value={formik.values.password} type="password" name="password" id="password" placeholder="Enter Password" />
           <div>
-            <input type="submit" value="LOGIN" /><br></br>
+            <input type = "checkbox"/>Remember me<br></br>
+            <button type="submit" value="LOGIN" />Login<br></br>
             
             <a href="/signup">Signup</a>
           
