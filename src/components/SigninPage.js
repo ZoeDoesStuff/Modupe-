@@ -54,8 +54,9 @@ function SigninPage({  }) {
           <input onChange={formik.handleChange} value={formik.values.password} type="password" name="password" id="password" placeholder="Enter Password" />
           <div>
             <input type = "checkbox"/>Remember me<br></br>
-            <button type="submit" value="LOGIN" />Login<br></br>
-            
+           
+            <button type="submit"  value="LOGIN">Login</button><br></br>
+        
             <a href="/signup">Signup</a>
           
           </div>

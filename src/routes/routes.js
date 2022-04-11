@@ -9,6 +9,7 @@ import ResetPass from '../components/resetpassword';
 import NotFound from '../components/notfound';
 import Home from "../components/secure/home";
 import RequireAuth from "../components/services/requireauth"
+import Welcome from "../components/welcome";
 const MyRoutes =()=>{
  return (
     <Routes>
@@ -17,7 +18,8 @@ const MyRoutes =()=>{
       <Route path="/settings" element={<Settings />}></Route>
       <Route path="/signup" element={<Signup />}></Route>
       <Route path="/contactus" element={<Contact />}></Route>
-      <Route path ="/resetpassword" element={<ResetPass/>}></Route>
+      <Route path ="/resetpassword" element={<ResetPass/>}></Route> 
+      <Route path = "/welcome" element={<Welcome/>}></Route>
       <Route path="/Home" element= {
         // <RequireAuth>
         <Home />
