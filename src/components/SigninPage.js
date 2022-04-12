@@ -20,7 +20,7 @@ function SigninPage({  }) {
     validationSchema: SigninvalidationSchema
   })
   const onSuccess = () => {
-  navigate ("/Home");
+  navigate ("/welcome");
   }
   const onFailure = (message) => {
     setServerError(message);
@@ -44,7 +44,7 @@ function SigninPage({  }) {
           <h1>Sign In</h1>
          
           <label htmlFor="name"> Email:</label>
-          <input onChange={formik.handleChange} value={formik.values.email} type="text" name="Email" id="Email" placeholder="Enter Email Here" />
+          <input onChange={formik.handleChange} value={formik.values.email} type="text" name="email" id="email" placeholder="Enter Email Here" />
           {formik.errors.names}
         </div>
         <div className="form-group">

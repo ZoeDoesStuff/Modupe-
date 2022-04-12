@@ -13,7 +13,7 @@ export const signUpvalidationSchema = Yup.object().shape({
  address: Yup.string().required("Address is required").required("Please use valid address"),
 });
 export const SigninvalidationSchema = Yup.object().shape({
-names: Yup.string().required("Use Full Name used before"),
+email: Yup.string().required("Email is Required").email("Email is invalid"),
 password: Yup.string().required('Password is Required'),
 });    
 

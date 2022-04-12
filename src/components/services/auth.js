@@ -27,9 +27,9 @@ export const signup = ({ names, email, password, phonenumber, address }, onSucce
     });
 }
 
-export const Signin = ({ Names, password }, onSuccess, onFailure) => {
-  const auth = getAuth(auth, Names, password);
-  signInWithEmailAndPassword(auth, Names, password)
+export const Signin = ({ email, password }, onSuccess, onFailure) => {
+  const auth = getAuth(auth, email, password);
+  signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
       console.log("userSignedInSuccessfully")
