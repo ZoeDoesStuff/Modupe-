@@ -32,11 +32,7 @@ function Signup() {
             setProcessing(false)
 
         },
-        validationSchema: signUpvalidationSchema,
-        validateOnChange: false,
-        validateOnBlur: false,
-       
-        
+        validationSchema: signUpvalidationSchema, 
     })
 
 

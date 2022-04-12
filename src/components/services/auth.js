@@ -3,7 +3,7 @@ import store from "../../store";
 
 export const signup = ({ names, email, password, phonenumber, address }, onSuccess, onFailure) => {
   const auth = getAuth();
-  createUserWithEmailAndPassword(auth, names, email, password, phonenumber, address)
+  createUserWithEmailAndPassword(auth, email, password )
     .then((userCredential) => {
       // Signed in 
       const user = userCredential.user;
@@ -28,7 +28,7 @@ export const signup = ({ names, email, password, phonenumber, address }, onSucce
 }
 
 export const Signin = ({ email, password }, onSuccess, onFailure) => {
-  const auth = getAuth(auth, email, password);
+  const auth = getAuth();
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;

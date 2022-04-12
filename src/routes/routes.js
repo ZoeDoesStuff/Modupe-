@@ -21,9 +21,9 @@ const MyRoutes =()=>{
       <Route path ="/resetpassword" element={<ResetPass/>}></Route> 
       <Route path = "/welcome" element={<Welcome/>}></Route>
       <Route path="/Home" element= {
-        // <RequireAuth>
+         <RequireAuth>
         <Home />
-      // </RequireAuth>
+       </RequireAuth>
     }/>
       <Route path="*" element={<NotFound/>}/>
     </Routes>

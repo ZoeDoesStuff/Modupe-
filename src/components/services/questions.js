@@ -1,4 +1,4 @@
-import { collection, doc, query, where, getFirestore, getDocs, writeBatch, setDoc } from "firebase/firestore"
+import { collection, doc, query, where, getFirestore, getDocs, writeBatch, setDoc, addDoc } from "firebase/firestore"
 import store from "../../store";
 
 
@@ -13,23 +13,43 @@ export const getListOfQuestions = async () => {
         questions.push(doc.data())
     });
     store.questions.set(questions)
+    console.log (questions)
 }
 export const submitAnswers = async (answers, onSuccess, onFailure) => {
-    const db = getFirestore();
-  
-    setDoc(doc(db, "submissions", answers.uid), answers,{ merge: true }).then(() => {
-      if (onSuccess) {
-        onSuccess();
-      }
-    }).catch((error) => {
-      console.log("emailNotSent")
-      // ..
-      if (onFailure) {
-        onFailure(error.message);
-      }
-    });
-  
+  const db = getFirestore();
+  if (answers.id) {
+    //update
+    setDoc(doc(db, "submissions", answers.id), answers, { merge: true })
+      .then(() => {
+        if (onSuccess) {
+          onSuccess(answers);
+        }
+      })
+      .catch((error) => {
+        console.log("emailNotSent");
+        // ..
+        if (onFailure) {
+          onFailure(error.message);
+        }
+      });
+  } else {
+    addDoc(collection(db, "submissions"), answers)
+      .then(() => {
+        if (onSuccess) {
+          onSuccess(answers);
+        }
+      })
+      .catch((error) => {
+        console.log(error.message);
+        // ..
+        if (onFailure) {
+          onFailure(error.message);
+        }
+      });
   }
+ };
+ 
+
 export const checkCorrect = async (questionid, answerid) => {
     const db = getFirestore();
     const q = query(collection(db, "answers"),

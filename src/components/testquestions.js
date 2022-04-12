@@ -31,24 +31,40 @@ const Testquestions = ({ listOfQuestions }) => {
         previousAnswers.set(answers)
     }
     let buttonHtml;
-    if (index === 0) {
-        buttonHtml = (
-            <>
-                <input type="button" value="Next" onClick={next} />
-            </>
-        );
-    } else if (index === listOfQuestions.length - 1) {
-        buttonHtml = (
-            <>
-                <input onClick={() => currentQuestionIndex.set(currentQuestionIndex - 1)} type="button">Previous</input>
-                <input type="button" value="Submit" />
-            </>
-        );
-    } else {
-        <>
-            <input onClick={() => currentQuestionIndex.set(currentQuestionIndex + 1)} type="button">Next</input>
-        </>;
-    }
+ if (index === 0) {
+   buttonHtml = (
+     <>
+       <input type="button" value="Next" onClick={next} />
+     </>
+   );
+ } else if (index === listOfQuestions.length - 1) {
+   buttonHtml = (
+     <>
+       <input
+         onClick={() => currentQuestionIndex.set(currentQuestionIndex.get() - 1)}
+         type="button"
+         value="Previous"
+       />
+       <input type="button" value="Submit" />
+     </>
+   );
+ } else {
+   buttonHtml = (
+     <>
+     <input
+         onClick={() => currentQuestionIndex.set(currentQuestionIndex.get() - 1)}
+         type="button"
+         value="Previous"
+       />
+       <input
+         onClick={() => currentQuestionIndex.set(currentQuestionIndex.get() + 1)}
+         type="button"
+         value="Next"
+       />
+     </>
+   );
+ }
+
     return (
         <form onSubmit={formik.handleSubmit}>
             <div key={`question${index}`}>
