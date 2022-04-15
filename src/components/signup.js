@@ -25,6 +25,7 @@ function Signup() {
             address: "",
         },
         onSubmit: (values) => {
+            signup(values, onSuccess)
             setProcessing(true)
             console.log(values)
             //call firebase to signup
@@ -34,14 +35,14 @@ function Signup() {
         },
         validationSchema: signUpvalidationSchema, 
     })
-
-
+    const onSuccess = () => {
+        navigate ("/welcome");
+    }
     return (
         <><div>
             <button> <a href="http://localhost:3000/">Login Page </a> </button> <button> <a href="/contactus">Contact Us </a> </button> <button> <a href="/resetpassword">Forgot Password?</a> </button> <button> <a href="/about">About Us</a> </button>
 
             <h1>Signup</h1>
-
             <form onSubmit={formik.handleSubmit}>
                 <label> Names (first and last):</label>
                 <input onChange={formik.handleChange} value={formik.values.names} type="text" name="names" id="names" placeholder="Enter Names Here" />
@@ -76,7 +77,7 @@ function Signup() {
                         {formik.errors.address}
                     </div>
 
-                    <br></br><button type="submit" >Signup</button>
+                    <br></br><button type="submit">Signup</button>
                     <br></br>
                     <br></br>
                     {processing && <FaSpinner icon="spinner" className="spinner animate-spin" color="red" size={35} />}
