@@ -5,7 +5,6 @@ import store from "../../store";
 export const getListOfQuestions = async () => {
   const db = getFirestore();
   const q = query(collection(db, "questions"));
-  console.log("got here1")
   const querySnapshot = await getDocs(q);
   const questions = []
   querySnapshot.forEach((doc) => {
@@ -67,7 +66,7 @@ export const checkCorrect = async ({ questionId, answer }) => {
   const db = getFirestore();
   const q = query(collection(db, "answers"),
     where("questionid", "==", questionId),
-    where("answer", "==", answer?.toLowerCase()));
+    where("answer", "==", answer));
  
   const querySnapshot = await getDocs(q);
   const isCorrect = querySnapshot.size === 1

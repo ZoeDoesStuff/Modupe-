@@ -100,7 +100,7 @@ const Testquestions = ({ listOfQuestions, answersDictionary }) => {
                             name={`option${i}`}
                             onChange={() => {
                               formik.setFieldValue(q.id, o)
-                              setAnswers({ ...answers, answer: o, questionId: q.id, uid: user.uid.get() })
+                              setAnswers({ ...answers, answer: o, questionid: q.id, uid: user.uid.get() })
                             }
                             }
                             checked={formik.values[q.id] === o || selectedAnswers?.answer === o}
@@ -117,7 +117,7 @@ const Testquestions = ({ listOfQuestions, answersDictionary }) => {
 
                 <div>
                   Answer:<input value={answers?.answer || ""} onChange={(e) => {
-                    setAnswers({ ...answers, answer: e.target.value, questionId: q.id, uid: user.uid.get() })
+                    setAnswers({ ...answers, answer: e.target.value, questionid: q.id, uid: user.uid.get() })
                     console.log(answers, '---')
                   }} id="Answer" name="Answer" placeholder='Enter Text' />
                 </div>
