@@ -10,6 +10,7 @@ import NotFound from '../components/notfound';
 import Home from "../components/secure/home";
 import RequireAuth from "../components/services/requireauth"
 import Welcome from "../components/welcome";
+import Results from "../components/results";
 const MyRoutes =()=>{
  return (
     <Routes>
@@ -25,6 +26,12 @@ const MyRoutes =()=>{
         <Home />
        </RequireAuth>
     }/>
+    <Route path="/results" element= {
+      <RequireAuth>
+      <Results/> 
+   </RequireAuth> 
+   }/>
+    
       <Route path="*" element={<NotFound/>}/>
     </Routes>
  )   

@@ -3,70 +3,72 @@ import { useState as useGlobalState } from "@hookstate/core"
 import store from "../store";
 import { submitAnswers } from "./services/questions";
 import { useEffect, useState } from "react";
-
+import { Navigate, useNavigate } from "react-router";
 
 const Testquestions = ({ listOfQuestions, answersDictionary }) => {
+  const navigate = useNavigate()
   const { user } = useGlobalState(store)
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [answers, setAnswers] = useState({})
   const [previousAnswers, setPreviousAnswers] = useState({})
-  const [processing, setProcessing] = useState();
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const index = currentQuestionIndex;
-  const q = listOfQuestions[index]
+  const selectedAnswer = useState()
+  const [processing, setProcessing] = useState(false)
+  const q = listOfQuestions[currentQuestionIndex]
   const questionId = q?.id
   const selectedAnswers = answersDictionary[questionId]
-
+  console.log(answersDictionary[questionId], "xyz")
   useEffect(() => {
     setAnswers(selectedAnswers)
   }, [selectedAnswers])
-
   const formik = useFormik({
-    initialValues: {},
-    onSubmit: (values) => {
-      setProcessing(true);
-      submitAnswers(answers, onSuccess)
+
+
+    initialValues: {
+
+    },
+    onSubmit: async (values) => {
+      setProcessing(true)
+      submitAnswers(answers, onSuccess, true)
     },
 
-    //validationSchema: SigninvalidationSchema
-  });
-
-
+  })
+  const questionsIndex = currentQuestionIndex
   const next = () => {
-    console.log("I got here")
-
+    console.log(answers, '+++')
     submitAnswers(answers, onNextSuccess)
-  };
-  const onNextSuccess = (answers) => {
-    setCurrentQuestionIndex(currentQuestionIndex + 1)
-    setPreviousAnswers(answers)
-  }
-  const onSuccess = (answers) => {
-    //navigate to somewhere else 
   }
   const previous = () => {
     setAnswers(previousAnswers)
     setCurrentQuestionIndex(currentQuestionIndex - 1)
-    console.log("prev", previousAnswers)
-
   }
+  const onNextSuccess = (answers) => {
+    setCurrentQuestionIndex(currentQuestionIndex + 1)
+    setPreviousAnswers(answers)
+    //setAnswers({answer: ''})
+  }
+  const onSuccess = () => {
+    navigate("/results")
+  }
+
   let buttonHtml;
   const previousButton = <input
     onClick={previous}
     type="button"
     value="Previous"
   />
-  const nextButton=<input type="button" value="Next" onClick={next} />
-  if (index === 0) {
+  const nextButton = <input type="button" value="Next" onClick={next} />
+  if (questionsIndex === 0) {
     buttonHtml = (
       <>
         {nextButton}
       </>
     );
-  } else if (index === listOfQuestions.length - 1) {
+
+  } else if (questionsIndex === listOfQuestions.length - 1) {
     buttonHtml = (
       <>
         {previousButton}
-        <input type="button" value="Submit" />
+        <button type="submit">Submit</button>
       </>
     );
   } else {
@@ -79,45 +81,59 @@ const Testquestions = ({ listOfQuestions, answersDictionary }) => {
   }
 
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <div key={`question${index}`}>
-        <div>Question {index + 1}</div>
-        <div>{q?.question}</div>
-        <div>
-          {q?.type === "multiple-choice" ? (
-            <>
-              {q?.options.map((o, i) => {
-                return (
-                  <div key={`option${i}`}>
-                    <input
-                      type="radio"
-                      id={`${q.id}-option${i}`}
-                      name={`${q.id}-option${i}`}
-                      onChange={() => {
-                        formik.setFieldValue(q.id, o)
-                        setAnswers({ ...answers, answer: o, questionId: q.id, uid: user.uid.get() })
-                      }}
-                      value={o}
-                      checked={formik.values[q.id] === o}
-                    />
-                    {o}
-                  </div>
-                );
-              })}
-            </>
-          ) : (
-            <div>Answer:<input id="Answer" name="Answer" placeholder="Enter" 
-            onChange={(e) => { setAnswers({ ...answers, answer: e.target.value, questionId: q.id, uid: user.uid.get() })}} />
-             
-            </div>
-          )}
+    <div>
+      <form onSubmit={formik.handleSubmit}>
+        <div >
+          <div key={`questions${questionsIndex}`}>
+            <div >Question {questionsIndex + 1}</div>
+            <div>{q?.question}</div>
+            <div>
+              {q?.type === "multiple-choice" ?
+                <>
+                  {q?.options?.map((o, i) => {
+                    return (
+                      <>
 
+                        <div key={`option${i}`}>
+                          <input type="radio"
+                            id={`option${i}`}
+                            name={`option${i}`}
+                            onChange={() => {
+                              formik.setFieldValue(q.id, o)
+                              setAnswers({ ...answers, answer: o, questionId: q.id, uid: user.uid.get() })
+                            }
+                            }
+                            checked={formik.values[q.id] === o || selectedAnswers?.answer === o}
+                            value={o}
+                          />
+                          {o}
+                        </div>
+                      </>
+                    );
+
+
+                  })}</>
+                :
+
+                <div>
+                  Answer:<input value={answers?.answer || ""} onChange={(e) => {
+                    setAnswers({ ...answers, answer: e.target.value, questionId: q.id, uid: user.uid.get() })
+                    console.log(answers, '---')
+                  }} id="Answer" name="Answer" placeholder='Enter Text' />
+                </div>
+              }</div>
+
+
+          </div>
+
+          <div>
+            {buttonHtml}
+          </div>
         </div>
 
-      </div>
-      <div>{buttonHtml}</div>
+      </form>
+    </div>
+  )
+}
 
-    </form>
-  );
-};
 export default Testquestions

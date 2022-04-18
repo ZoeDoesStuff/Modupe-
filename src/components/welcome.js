@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 function Welcome() {
    const navigate = useNavigate()
     return (
-        <><div>Welcome Friend! Thank you for Joining Us! Click below to start your test now!</div><br></br><button onClick={()=>{navigate("/home")} }>Start Test</button></>
+        <><div>Welcome Friend! Thank you for Joining Us! Click below to start your test now! Please do this test only once.</div><br></br><button onClick={()=>{navigate("/home")} }>Start Test</button></>
         )
 }
 export default Welcome;

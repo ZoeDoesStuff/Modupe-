@@ -53,11 +53,10 @@ function SigninPage({  }) {
           <label htmlFor="password">Password:</label>
           <input onChange={formik.handleChange} value={formik.values.password} type="password" name="password" id="password" placeholder="Enter Password" />
           <div>
-            <input type = "checkbox"/>Remember me<br></br>
            
-            <button type="submit"  value="LOGIN">Login</button><br></br>
+            <button type="submit"  value="LOGIN">Login</button>
         
-            <a href="/signup">Signup</a>
+            <p>Click Signup below before logging in for first time</p><a href="/signup">Signup</a>
           
           </div>
         </div>
