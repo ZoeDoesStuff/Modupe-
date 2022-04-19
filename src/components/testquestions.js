@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import { useState as useGlobalState } from "@hookstate/core"
 import store from "../store";
-import { submitAnswers } from "./services/questions";
+import { getResults, submitAnswers } from "./services/questions";
 import { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router";
 

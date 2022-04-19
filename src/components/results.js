@@ -1,7 +1,8 @@
 import store from "./../store";
 import { useState } from "@hookstate/core";
-import { useEffect } from 'react'
-
+import { React, useEffect } from "react";
+import { showResults } from "./services/questions";
+import { useNavigate } from "react-router";
  
  
 function Results() {
