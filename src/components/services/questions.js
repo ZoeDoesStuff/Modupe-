@@ -44,28 +44,27 @@ export const submitAnswers = async (answers, onSuccess, isLast, onFailure,) => {
           onFailure(error.message);
         }
       });
-  } else {
-    addDoc(collection(db, "submissions"), answers)
-      .then((d) => {
-        if (onSuccess) {
-          answers = { id: d.id, ...answers }
-          console.log("answers add", answers)
-          onSuccess(answers);
-        }
-      })
-      .catch((error) => {
-        console.log(error.message);
-        // ..
-        if (onFailure) {
-          onFailure(error.message);
-        }
-      });
-  }
-};
-export const checkCorrect = async ({ questionId, answer }) => {
+    } else {
+      addDoc(collection(db, "submissions"), answers)
+        .then((answers) => {
+          if (onSuccess) {
+            onSuccess(answers);
+          }
+        })
+        .catch((error) => {
+          console.log(error.message);
+          // ..
+          if (onFailure) {
+            onFailure(error.message);
+          }
+        });
+    }
+  };
+  
+export const checkCorrect = async ({ questionid, answer }) => {
   const db = getFirestore();
   const q = query(collection(db, "answers"),
-    where("questionid", "==", questionId),
+    where("questionid", "==", questionid),
     where("answer", "==", answer));
  
   const querySnapshot = await getDocs(q);
@@ -85,26 +84,21 @@ export const getAnswers = async (uid) => {
     answers[data.questionId] = data
   });
   store.answers.set(answers);
-  console.log(answers, "+++")
 };
  
 export const countCorrect = async (uid) => {
   const db = getFirestore();
-  const q = query(collection(db, "submissions"),
-    where("isCorrect", "==", true),
-    where("uid", "==", uid));
+  const q = query(
+    collection(db, "submissions"),
+    where("uid", "==", uid),
+    where("isCorrect", "==", true)
+  );
  
   const querySnapshot = await getDocs(q);
-  const correct = []
-  querySnapshot.forEach((doc) => {
- 
-    correct.push(doc.data())
- 
-  });
-  return correct.length
- 
- 
+  const numberCorrect = querySnapshot.size;
+  return numberCorrect;
 };
+
  
 export const countIncorrect = async (uid) => {
   const db = getFirestore();
@@ -123,7 +117,20 @@ export const countIncorrect = async (uid) => {
  
  
 };
+export const getResults = async (uid) => {
+  const db = getFirestore();
+  const q = query(collection(db, "submissions"), where("uid", "==", uid));
  
+  const querySnapshot = await getDocs(q);
+  const results = [];
+  querySnapshot.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+    console.log(doc.id, " => ", doc.data());
+    results.push(doc.data());
+  });
+  store.results.set(results);
+};
+
 export const showResults = async ( uid ) => {
   const db = getFirestore();
   try {

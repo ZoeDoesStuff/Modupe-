@@ -11,12 +11,10 @@ const Testquestions = ({ listOfQuestions, answersDictionary }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [answers, setAnswers] = useState({})
   const [previousAnswers, setPreviousAnswers] = useState({})
-  const selectedAnswer = useState()
   const [processing, setProcessing] = useState(false)
   const q = listOfQuestions[currentQuestionIndex]
   const questionId = q?.id
   const selectedAnswers = answersDictionary[questionId]
-  console.log(answersDictionary[questionId], "xyz")
   useEffect(() => {
     setAnswers(selectedAnswers)
   }, [selectedAnswers])
@@ -99,11 +97,11 @@ const Testquestions = ({ listOfQuestions, answersDictionary }) => {
                             id={`option${i}`}
                             name={`option${i}`}
                             onChange={() => {
-                              formik.setFieldValue(q.id, o)
-                              setAnswers({ ...answers, answer: o, questionid: q.id, uid: user.uid.get() })
+                              formik.setFieldValue(q?.id, o)
+                              setAnswers({ ...answers, answer: o, questionid: q?.id, uid: user.uid.get() })
                             }
                             }
-                            checked={formik.values[q.id] === o || selectedAnswers?.answer === o}
+                            checked={formik.values[q?.id] === o || selectedAnswers?.answer === o}
                             value={o}
                           />
                           {o}
