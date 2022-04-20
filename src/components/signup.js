@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 
 function Signup() {
     const [processing, setProcessing] = useState(false)
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const signupHandler = () => {
         navigate("http://localhost:3000/")
     }
@@ -40,7 +40,10 @@ function Signup() {
     }
     return (
         <><div>
-            <button> <a href="http://localhost:3000/">Login Page </a> </button> <button> <a href="/contactus">Contact Us </a> </button> <button> <a href="/resetpassword">Forgot Password?</a> </button> <button> <a href="/about">About Us</a> </button>
+            <button onClick={() => navigate("/")}>LoginPage</button> 
+            <button onClick={() => navigate("/contactus")}>Contact Us Page</button>  
+            <button onClick={() => navigate("/resetpassword")}>Reset Password Page</button>
+            <button onClick={() => navigate("/about")}>About Page</button>
 
             <h1>Signup</h1>
             <form onSubmit={formik.handleSubmit}>

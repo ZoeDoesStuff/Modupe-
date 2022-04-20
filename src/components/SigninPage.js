@@ -34,7 +34,9 @@ function SigninPage({  }) {
   const aboutHandler = () => {
     navigate("/about")
   }
- 
+ const Signup = () => {
+   const navigate = useNavigate(); 
+ }
   return (
     <><div className='App' onClick={signupHandler}>
     </div>
@@ -56,7 +58,7 @@ function SigninPage({  }) {
            
             <button type="submit"  value="LOGIN">Login</button>
         
-            <p>Click Signup below before logging in for first time</p><a href="/signup">Signup</a>
+            <p>Click Signup below before logging in for first time</p><button onClick={()=>navigate("/signup")}>Signup Page</button>
           
           </div>
         </div>
