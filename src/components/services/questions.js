@@ -46,8 +46,9 @@ export const submitAnswers = async (answers, onSuccess, isLast, onFailure,) => {
       });
     } else {
       addDoc(collection(db, "submissions"), answers)
-        .then((answers) => {
+        .then((anz) => {
           if (onSuccess) {
+            answers = { id: anz.id, ...answers }
             onSuccess(answers);
           }
         })
